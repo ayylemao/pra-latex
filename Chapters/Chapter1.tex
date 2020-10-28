@@ -20,37 +20,41 @@ Atomar fingerprints can be used to measure similiarities and dissimilarities bet
 \section{Calculation of the Fingerprint}
 For each atom $k$ located at $\mathbf{R}_k$ in the crystal, we consider all neighbouring atoms contained in a sphere around $\mathbf{R}_k$. On each of those atoms, we put one or more Gaussian type orbitals, and calculate an overlap matrix as described by \citeauthor{Sadeghi2013} \cite{Sadeghi2013}.
 \subsection{Overlap Matrix}
-The overlap matrix of the GTO's has similar properties as the hamiltonian but is easily calculated analytically according to \citeauthor{Sadeghi2013} \cite{Sadeghi2013}. For this they introduce the normalized GTO's centered at the atomic positions $\mathbf{r}_i$ as
+The overlap matrix of the Gaussian type Orbitals (GTO) has similar properties as the Hamiltonian but is easily calculated analytically according to \citeauthor{Sadeghi2013} \cite{Sadeghi2013}. For this they introduce the normalized GTO's centered at the atomic positions $\mathbf{r}_i$ as
 \begin{equation}\phi_i^l(\mathbf{r})=N_l(x-x_i)^{l_x}(y-y_j)^{l_y}(z-z_i)^{l_z}e^{-\alpha_i||\mathbf{r}-\mathbf{r}_i||^2}.\end{equation}
-With $L=l_x+l_y+l_z$ as the angular momentum. The gaussian width $\alpha_i$ is proportional to the inverse of the covalent radius of atom $i$. In our work we modified the gaussian width $\alpha_i$ further to depend on the orbital eigenenergy of the corresponding orbitals. The orbitals considered were the 2s and 2p orbitals of Nitrogen and Carbon. The dependence on these energies was defined as:
-\begin{equation}\label{eq:const}\tilde{\alpha}_i=C\cdot\frac{\alpha_i}{\left|E_{Orbital}\right|}\end{equation} 
+With $L=l_x+l_y+l_z$ as the angular momentum. The Gaussian width $\alpha_i$ is proportional to the inverse of the covalent radius of atom $i$. In our work we modified the Gaussian width $\alpha_i$ further to depend on the orbital eigenenergy of the corresponding orbitals. The orbitals considered were the 2s and 2p orbitals of Nitrogen and Carbon. The dependence on these energies was defined as:
+\begin{equation}\label{eq:const}\tilde{\alpha}_i=C\cdot\frac{\alpha_i}{\left|E_{Orbital}\right|}.\end{equation} 
 The constant $C$ was then experimentaly determined. In the remainder of this work we will omit the tilde of $\tilde{\alpha}_i$.\\
-The overlap integrals of two GTO's 
+The overlap integral of two GTO's is
 \begin{equation}\left<\phi_i^l\right|\left.\phi_j^{l'}\right>=\int d\mathbf{r}\,\phi_i^l(\mathbf{r})\phi^{l'}_j(\mathbf{r})\end{equation}
-gives the normalization factors as
-\begin{equation}N_l(\alpha_i)=\frac{1}{\sqrt{\left<\phi_i^l\right|\left.\phi_i^l\right>}}=\left(\frac{2\alpha_i}{\pi}\right)^{\frac{3}{4}}\sqrt{n_{l_x}n_{l_y}n_{l_z}}\end{equation}
+and gives the normalization factors as
+\begin{equation}N_l(\alpha_i)=\frac{1}{\sqrt{\left<\phi_i^l\right|\left.\phi_i^l\right>}}=\left(\frac{2\alpha_i}{\pi}\right)^{\frac{3}{4}}\sqrt{n_{l_x}n_{l_y}n_{l_z}},\end{equation}
 with
-$$n_k=\frac{(4\alpha_i)^k}{(2k-1)!!}$$
+$$n_k=\frac{(4\alpha_i)^k}{(2k-1)!!}.$$
 The Orbitals are then obtained by differentiating
 $$\phi_i^s(\mathbf{r})=\left(\frac{2\alpha_i}{\pi}\right)^{\frac{3}{4}}e^{-\alpha_i||\mathbf{r}-\mathbf{r}_i||^2}$$
 as
-\begin{equation}\phi_i^{p_j}=\frac{1}{\sqrt{\alpha_i}}\frac{\partial\phi_i^s(\mathbf{r})}{\partial r_j}\end{equation}
+\begin{equation}\phi_i^{p_j}=\frac{1}{\sqrt{\alpha_i}}\frac{\partial\phi_i^s(\mathbf{r})}{\partial r_j}.\end{equation}
 The simplified relation for calculating the elements of the overlap matrix according to \citeauthor{Clementi1966} \cite{Clementi1966} are then
 \begin{equation}
 \label{ovrlap}
-S_{ij}=S_{ji}=\left(\frac{2\sqrt{\alpha_i\alpha_j}}{\alpha_i+\alpha_j}\right)^\frac{3}{2}\exp\left[\frac{-\alpha_i\alpha_j}{\alpha_i+\alpha_j}r_{ij}^2\right]\end{equation}
-for the $s$-$s$ overlap. The $s$-$p$ overlap and the $p$-$p$ overlap is then obtained by
-\begin{equation}\bra{\phi_i^{p_x}}\ket{\phi_j^s}=\\ \frac{1}{\sqrt{\alpha_i}}\frac{\partial S_{ij}}{\partial x_i}=-\left(\frac{2\sqrt{\alpha_i}\alpha_j}{\alpha_i+\alpha_j}\right)(x_i-x_j)S_{ij}\end{equation}
-\begin{equation}\bra{\phi_i^{p_x}}\ket{\phi_j^{p_{x'}}}=\left(\frac{2\sqrt{\alpha_i\alpha_j}}{\alpha_i+\alpha_j}\right)S_{ij}\left[\delta_{x,x'}-\frac{2\alpha_i\alpha_j}{\alpha_i+\alpha_j}(x_i-x_j)(x'_i-x'_j)\right].\end{equation}
+S_{ij}=S_{ji}=\left(\frac{2\sqrt{\alpha_i\alpha_j}}{\alpha_i+\alpha_j}\right)^\frac{3}{2}\exp\left[\frac{-\alpha_i\alpha_j}{\alpha_i+\alpha_j}r_{ij}^2\right],\end{equation}
+for the $s$-$s$ overlap. The $s$-$p$ overlap and the $p$-$p$ overlap are then obtained by
+\begin{equation}
+\begin{aligned}
+\bra{\phi_i^{p_x}}\ket{\phi_j^s} &= \frac{1}{\sqrt{\alpha_i}}\frac{\partial S_{ij}}{\partial x_i}=-\left(\frac{2\sqrt{\alpha_i}\alpha_j}{\alpha_i+\alpha_j}\right)(x_i-x_j)S_{ij} \\
+\bra{\phi_i^{p_x}}\ket{\phi_j^{p_{x'}}}&=\left(\frac{2\sqrt{\alpha_i\alpha_j}}{\alpha_i+\alpha_j}\right)S_{ij}\left[\delta_{x,x'}-\frac{2\alpha_i\alpha_j}{\alpha_i+\alpha_j}(x_i-x_j)(x'_i-x'_j)\right].
+\end{aligned}
+\end{equation}
 
 \subsection{Amplitude weighing}
 The overlap matrix $S^k_{ij}$ for the $k$-th atom in the sphere is now defined as
 \begin{equation}S^k_{ij}=\int d\mathbf{r}\, G_i(\mathbf{r}-\mathbf{R}_{w(i)})G_j(\mathbf{r}-\mathbf{R}_{w(j)})\end{equation}
-where the Gaussians are normalized to one and the width of each Gaussian $G_i(\mathbf{r})$ is given by the covalent radius of the atom $w(i)$ as in \cite{Zhu2016} and the eigenenergy of the respective orbital. At the sphere boundaries there maybe discontinuities in the eigenvalues when atoms enter or leave the sphere. For that reason one constructs a matrix $T^k$ such that
-\begin{equation}T^k_{ij}=f_c(|\mathbf{R}_{w(i)}-\mathbf{R}_k)S^k_{ij}f_c(\mathbf{R}_{w(j)}-\mathbf{R}_k))\end{equation}
+where the Gaussians are normalized to one and the width of each Gaussian $G_i(\mathbf{r})$ is given by the covalent radius of the atom $w(i)$ as in \cite{Zhu2016} and the eigenenergy of the respective orbital. At the sphere boundaries there might be discontinuities in the eigenvalues when atoms enter or leave the sphere. For that reason one constructs a matrix $T^k$ such that
+\begin{equation}T^k_{ij}=f_c(|\mathbf{R}_{w(i)}-\mathbf{R}_k)S^k_{ij}f_c(\mathbf{R}_{w(j)}-\mathbf{R}_k)),\end{equation}
 with $f_c$ a cuttoff function which goes smoothly to zero on the surface of the sphere
-\begin{equation}f_c(r)=\left(1-\frac{r^2}{2n\sigma_c^2}\right)^n\end{equation}
-The eigenvalues of $T^k$ sorted in descending orders form the fingerprint of the atomic environement of the atom $k$. The number of entries in this fingerprint vector depend on the number of atoms in the sphere. Since this number maybe different for each configuration, one assumes a maximum length for the vector. Subsequent entries that are not touched on by the fingerprint, are just set to zero \cite{Zhu2016}.
+\begin{equation}f_c(r)=\left(1-\frac{r^2}{2n\sigma_c^2}\right)^n.\end{equation}
+The eigenvalues of $T^k$ sorted in descending orders form the fingerprint of the atomic environement of the atom $k$. The number of entries in this fingerprint vector depend on the number of atoms in the sphere. Since this number can be different for each configuration, one assumes a maximum length for the vector. Subsequent entries that are not touched on by the fingerprint, are just set to zero \cite{Zhu2016}.
 \subsection{Measuring similarity}
 The euclidian distance between two fingerprint vectors $\mathbf{V}_i$, $\mathbf{V}_j$ 
 \begin{equation}\label{fp_dist}
@@ -61,10 +65,10 @@ is now a direct measure for the similarity of two atomic environments. This can 
 $P$ is a permutation which matches atoms in crystal $p$ to atoms in crystal $q$. The permutation which minimizes $d(p,q)$ can be found via the Hungarian algorithm \cite{Kuhn1955}. However for this work, we are mainly interested in the atomic environments and not in the fingerprints for clusters.
 
 \section{Maximum Volume Simplex Method}
-The method of the maximum volume simplex was proposed by \citeauthor{Behnam2020} \cite{Behnam2020} and gives a way, to do the inverse operation to calculating fingerprint distances. It calculates the fingerprint vectors from a given set of fingerprint distances. These fingerprints are the corners of a simplex or particularly the largest volume simplex. The corners of this largest volume simplex correspond to landmark environements, which then in turn can be used to classify fingerprints compared to the corners. This gives us a method of "training" a simplex on a set of fingerprints and their configurations and then evaluating its result on a test set of configurations. In the following sections we will give a brief review of the largest volume simplex method as it was described in the original paper \cite{Behnam2020}.
+The method of the maximum volume simplex was proposed by \citeauthor{Behnam2020} \cite{Behnam2020} and gives a way to do the inverse operation to calculating fingerprint distances. It calculates the fingerprint vectors from a given set of fingerprint distances. These fingerprints are the corners of a simplex or particularly the largest volume simplex. The corners of this largest volume simplex correspond to landmark environements, which then in turn can be used to classify fingerprints compared to the corners. This gives us a method of \emph{training} a simplex on a set of fingerprints and their configurations and then evaluating its result on a test set of configurations. In the following sections we will give a brief review of the largest volume simplex method as it was described in the original paper \cite{Behnam2020}.
 \subsection{Obtaining fingerprint vectors from fingerprint distances}
-Given a set of pairwise fingerprint distances $d_{ij}$ (\ref{fp_dist}) we want to find a set of points $\mathbf{x}^i$ which satisfy the constraint
-\begin{equation}d_{ij}=|\mathbf{x}^i-\mathbf{x}^j|\end{equation}
+Given a set of pairwise fingerprint distances $d_{ij}$, see eq. (\ref{fp_dist}), we want to find a set of points $\mathbf{x}^i$ which satisfy the constraint
+\begin{equation}d_{ij}=|\mathbf{x}^i-\mathbf{x}^j|.\end{equation}
 Requiring that the first point $\mathbf{x}^0$ is at the origin and that for each consecutive point the number of nonzero components increases by one makes the solution to the problem unique. The points $\mathbf{x}^i$ have the following structure:
 \begin{equation} (\mathbf{x}^1, \mathbf{x}^2, \ldots, \mathbf{x}^N) = 
 \left(\begin{matrix}
@@ -74,11 +78,11 @@ x_{1,1} & x_{1,2} & \cdots & x_{1,N} \\
 0 & 0 & 0 & x_{N,N}   
 \end{matrix}\right)
 \end{equation}
-With the first point at the origin, the next point is placed on the positive x-axis at the corresponding distance with the 3rd point on the xy-plane and so on. We can then aquire the components of the points $\mathbf{x}^i$ with simple relations recusivle from the distances $d_{ij}$. The distance of $\mathbf{x}^N$ to the origin $\mathbf{x}^0$ is given by its norm
-\begin{equation}d_{0,N}^2=\sum_{i=1}^N x_{i,N}^2\end{equation}
+With the first point at the origin, the next point is placed on the positive x-axis at the corresponding distance with the 3rd point on the xy-plane and so on. We can then aquire the components of the points $\mathbf{x}^i$ with simple relations recursivly from the distances $d_{ij}$. The distance of $\mathbf{x}^N$ to the origin $\mathbf{x}^0$ is given by its norm
+\begin{equation}d_{0,N}^2=\sum_{i=1}^N x_{i,N}^2.\end{equation}
 The difference between column $N$ and $M$ for $M<N$ is related to the distance of $\mathbf{x}^N$ and $\mathbf{x}^M$ as
 \begin{equation}\label{eq:1}
- d^2_{M,N}=\sum_{i=1}^M(x_{i,N}-x_{i,M})^2+\sum_{j=M+1}^N x^2_{j,N}\end{equation}
+ d^2_{M,N}=\sum_{i=1}^M(x_{i,N}-x_{i,M})^2+\sum_{j=M+1}^N x^2_{j,N}.\end{equation}
 
 Now one can take the difference between $d^2_{M,N}$ and $d^2_{0,N}$ and obtain a set of equations
 \begin{equation}d^2_{M,N}-d^2_{0,N}=\sum_{i=1}^M -x_{i,M}(2x_{i,N} - x_{i,M}).\end{equation}
@@ -91,5 +95,5 @@ For $M=N$ we get:
 x_{M,N}=\sqrt{d^2_{0,N}-\sum_{i=1}^{N-1}x^2_{i,N}}
 \end{equation}
 The points $\mathbf{x}^i$ are now our fingerprint vectors extracted from the distances $d_{ij}$. 
-\subsection{Contructing the largest volume simplex}
+\subsection{Constructing the largest volume simplex}
 Constructing the largest simplex is done by first identifying the two environements with largest distance. These define the origin $\mathbf{x}^0$ and the first point on the x-axis $\mathbf{x}^1$. Our simplex at this stage ist just a line. The next step is to identify the environment which will give the largest area triangle with the point $\mathbf{x}^2$. This procedure is then repeated and corners are added to the simplex until adding a subsequent corner at step $l$ would collapse the total volume, meaning that further fingerprints are quasi linearly dependent on the previous ones. This procedure identifies from our \emph{trainings set} the landmark configurations, to which we can compare our \emph{test configurations}.
