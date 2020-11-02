@@ -9,7 +9,7 @@
 %----------------------------------------------------------------------------------------
 
 \section{Implementation}
-The code base worked with, was a direct Fortran90 implementation of the fingerprint algorithm proposed by \cite{Zhu2016}. The compiler used for all computation was the GNU Fortran compiler \cite{gnufortran}.
+The code  worked  with, was a direct Fortran90 implementation of the fingerprint algorithm proposed by \cite{Zhu2016}. The compiler used for all computation was the GNU Fortran compiler \cite{gnufortran}.
 
 \subsection{Data}
 The structures used for evaluating our methods were carbon-nitrate crystals. The data contained the positions of the atoms in cartesian coordinates and the lattice vectors of the unit cell. We thank Prof. Alireza Ghasemi for providing us with the data base of carbon-nitate structures that we have analysed.
@@ -44,7 +44,7 @@ For calculating the overlap matrix (eq. \ref{ovrlap} ff.) the Gaussian width $\a
 \caption{2s and 2p orbital eigenenergies of N and C.}
 \end{table}
 
-The constant $C$ in (eq. \ref{eq:const}) was experimentally determined. To obtain a good resolution in comparing the fingerprints, the entries of the fingerprints should be reasonably large, but not to close to each other. One can see the effect of the constant $C$ out of (eq. \ref{eq:const}) by plotting the constant vs. the entries of the fingerprint.
+The constant $C$ in (eq. \ref{eq:const}) was empirically determined. To obtain a good resolution in comparing the fingerprints, the entries of the fingerprints should be reasonably large, but not to close to each other. One can see the effect of the constant $C$ out of (eq. \ref{eq:const}) by plotting the constant vs. the entries of the fingerprint.
 With plots as seen in Figure \ref{fig:const} one can determine approximate boundaries for the constant. The entries should be reasonably distinct but still large enough to get a good resolution. The fine tuning was then done via maximizing the prediction accuracy. The final value used for all calculation was $C=0.19$.
 
 
@@ -59,7 +59,7 @@ With plots as seen in Figure \ref{fig:const} one can determine approximate bound
 \section{Results}
 \subsection{Landmark structures}
 
-To calculate the landmark structures out of the fingerprints, we used a direct implementation of the maximum volume simplex method \cite{Behnam2020}. The task of this method should be to evaluate all atomar fingerprints given to it, and return the most distinct environments. These most distinct environments should furthermore each describe a different case of possible atomic environment regarding number of nearest neighbours (ligancy or coordination number) and type of nearest neighbours and their permutations. The method was evaluated on the set of 99 crystals with 8 atoms per crystal. Out of these 792 possible environments, the algorithm constructed a maximum volume simplex with 101 corners. A few of these landmark environments can be seen in Figure \ref{fig:landmarks1}, Figure \ref{fig:landmarks2}, Figure \ref{fig:landmarks3} and Figure \ref{fig:landmarks4}. The center atom is always either colored red for carbon and yellow for nitrogen in these depictions. Some of the atomic bonds were omited selectivly for visual clarity.
+To calculate the landmark structures out of the fingerprints, we used a direct implementation of the maximum volume simplex method \cite{Behnam2020}. The task of this method should be to evaluate all atomistic given fingerprints, and return the most distinct environments. These most distinct environments should furthermore each describe a different case of possible atomic environment regarding number of nearest neighbours (ligancy or coordination number) and type of nearest neighbours and their permutations. The method was evaluated on the set of 99 crystals with 8 atoms per crystal. Out of these 792 possible environments, the algorithm constructed a maximum volume simplex with 101 corners. A few of these landmark environments can be seen in Figure \ref{fig:landmarks1}, Figure \ref{fig:landmarks2}, Figure \ref{fig:landmarks3} and Figure \ref{fig:landmarks4}. The center atom is always either colored red for carbon and yellow for nitrogen in these depictions. Some of the atomic bonds were omited selectivly for visual clarity.
 
 
 \begin{figure}[h!]
@@ -72,11 +72,11 @@ To calculate the landmark structures out of the fingerprints, we used a direct i
 
 \begin{figure}[p]
 \center
-\subfloat[Once coordinated nitrogen]{%
+\subfloat[One-coordinated nitrogen]{%
   \includegraphics[clip,scale=0.3]{Figures/landmark2.png}%
 }
 
-\subfloat[Twice coordinated carbon]{%
+\subfloat[Two-coordinated carbon]{%
   \includegraphics[clip,scale=0.3]{Figures/landmark3.png}%
 }
 
@@ -87,11 +87,11 @@ To calculate the landmark structures out of the fingerprints, we used a direct i
 
 \begin{figure}[p]
 \center
-\subfloat[Three times coordinated nitrogen with 3 carbon and 1 nitrogen neighbour]{%
+\subfloat[Three-coordinated nitrogen with 3 carbon and 1 nitrogen neighbour]{%
   \includegraphics[clip,scale=0.3]{Figures/landmark4.png}%
 }
 
-\subfloat[Three times coordinated nitrogen with 3 carbon neighbours]{%
+\subfloat[Three-coordinated nitrogen with 3 carbon neighbours]{%
   \includegraphics[clip,scale=0.3]{Figures/landmark5.png}%
 }
 
@@ -102,11 +102,11 @@ To calculate the landmark structures out of the fingerprints, we used a direct i
 
 \begin{figure}[p]
 \center
-\subfloat[Twice coordinated carbon with 2 nitrogen neighbours]{%
+\subfloat[Two-coordinated carbon with 2 nitrogen neighbours]{%
   \includegraphics[clip,scale=0.3]{Figures/landmark6.png}%
 }
 
-\subfloat[Three times coordinated carbon with 3 nitrogen neighbours]{%
+\subfloat[Three-coordinated carbon with 3 nitrogen neighbours]{%
   \includegraphics[clip,scale=0.3]{Figures/landmark7.png}%
 }
 
@@ -118,7 +118,7 @@ To calculate the landmark structures out of the fingerprints, we used a direct i
 
 \newpage
 \subsection{Classification}
-The classification was done in a relativly simple way. First, the \emph{trainings fingerprints} are calculated with the procedures mentioned earlier in this text. Then, the maximum simplex method is used to identify 101 landmark fingerprints. Of these landmark fingerprints, the type of center atom is stored aswell. Now, any atomar fingerprint can be compared to the landmark fingerprint via the euclidian distance. If the closest corner to our atom is carbon, it predicts carbon. If the closest corner is nitrogen, it predicts nitrogen.\\
+The classification was done in a relativly simple way. First, the \emph{trainings fingerprints} are calculated with the procedures mentioned earlier in this text. Then, the maximum simplex method is used to identify 101 landmark fingerprints. Of these landmark fingerprints, the type of center atom is stored as well. Now, any atomistic fingerprint can be compared to the landmark fingerprint via the euclidian distance. If the closest corner to our atom is carbon, it predicts carbon. If the closest corner is nitrogen, it predicts nitrogen.\\
 \subsubsection{Training on eight atom crystals}
 We trained our model first on a set of 99 configurations with 8 atoms per cell (3 Carbon and 5 Nitrogen). This was then validated on a set of 4949 crystals with 16 atoms per cell (6 carbon and 10 nitrogen) which gives us about 79'000 different environments to classify. The results of this procedure can be seen in Table \ref{table:res1}. 
 
